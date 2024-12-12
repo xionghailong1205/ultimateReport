@@ -29,6 +29,12 @@ const RetrievePatientDialog = () => {
                 style={{
                     maxWidth: "1000px"
                 }}
+
+                onPointerDownOutside={
+                    (event) => {
+                        event.preventDefault()
+                    }
+                }
             >
                 <DialogHeader>
                     <DialogTitle>检索病人</DialogTitle>
@@ -50,95 +56,86 @@ const RetrievePatientDialog = () => {
 
 const Form = () => {
     return (
-        <Row>
-            <CustomInput
-                label="体检人员ID:"
-                type="text"
-                containerWidth={200}
-                inputWidth={120}
-            />
-            <CustomInput
-                label="人员姓名:"
-                type="text"
-                containerWidth={200}
-                inputWidth={120}
-            />
-            <CustomInput
-                label="体检编号:"
-                type="text"
-                containerWidth={200}
-                inputWidth={120}
-            />
-        </Row>
-        // <div>
-        //     <CustomInput
-        //         label="体检人员ID:"
-        //         type="text"
-        //         containerWidth={200}
-        //         inputWidth={120}
-        //     />
-        //     {/* <div
-        //         style={{
-        //             display: "flex",
-        //             width: "200px",
-        //             alignItems: "center"
-        //         }}
-        //     >
-        //         <Label
-        //             style={{
-        //                 fontSize: "14px",
-        //                 // flex: 1,
-        //             }}
-        //         >
-        //             人员姓名
-        //         </Label>
-        //         <Input
-        //             type="text" placeholder="请输入..."
-        //             style={{
-        //                 maxWidth: "100px",
-        //             }}
-        //         />
-        //     </div>
-        //     <div
-        //         style={{
-        //             display: "flex",
-        //             width: "200px",
-        //             alignItems: "center"
-        //         }}
-        //     >
-        //         <Label
-        //             style={{
-        //                 fontSize: "14px",
-        //                 // flex: 1,
-        //             }}
-        //         >
-        //             体检编号
-        //         </Label>
-        //         <Input
-        //             type="text" placeholder="请输入..."
-        //             style={{
-        //                 maxWidth: "100px",
-        //             }}
-        //         />
-        //     </div> */}
-        //     {/* <div
-        //         style={{
-        //             display: "flex",
-        //             width: "200px",
-        //             alignItems: "center"
-        //         }}
-        //     >
-        //         <Label
-        //             style={{
-        //                 fontSize: "14px",
-        //                 // flex: 1,
-        //             }}
-        //         >
-        //             体检日期
-        //         </Label>
-        //         <CustomCalendar />
-        //     </div> */}
-        // </div>
+        <>
+            <Row
+                style={{
+                    gap: "20px"
+                }}
+            >
+                <CustomInput
+                    label="体检人员ID:"
+                    type="text"
+                    containerWidth={210}
+                    inputWidth={120}
+                />
+                <CustomInput
+                    label="人员姓名:"
+                    type="text"
+                    containerWidth={200}
+                    inputWidth={120}
+                />
+                <CustomInput
+                    label="体检编号:"
+                    type="text"
+                    containerWidth={200}
+                    inputWidth={120}
+                />
+                <CustomInput
+                    label="体检日期:"
+                    type="date"
+                    containerWidth={240}
+                    inputWidth={160}
+                />
+            </Row>
+            <Row
+                style={{
+                    gap: "20px"
+                }}
+            >
+                <CustomInput
+                    label="版本:"
+                    type="text"
+                    containerWidth={130}
+                    inputWidth={80}
+                />
+                <CustomInput
+                    label="单位社会信用代码:"
+                    type="text"
+                    containerWidth={250}
+                    inputWidth={120}
+                />
+                <CustomInput
+                    label="单位名称:"
+                    type="text"
+                    containerWidth={200}
+                    inputWidth={120}
+                />
+                <CustomInput
+                    label="性别:"
+                    type="text"
+                    containerWidth={130}
+                    inputWidth={90}
+                />
+            </Row>
+            <Row
+                style={{
+                    gap: "20px"
+                }}
+            >
+                <CustomInput
+                    label="生日:"
+                    type="text"
+                    containerWidth={130}
+                    inputWidth={80}
+                />
+                <CustomInput
+                    label="年龄:"
+                    type="text"
+                    containerWidth={130}
+                    inputWidth={80}
+                />
+            </Row>
+        </>
     )
 }
 
@@ -167,9 +164,15 @@ const CustomInput = ({
 
     switch (type) {
         case "text": {
+            // do nothing here
             break
         }
         case "date": {
+            SpecifiedInput = () => {
+                return (
+                    <CustomCalendar />
+                )
+            }
             break
         }
         default: {
@@ -182,7 +185,7 @@ const CustomInput = ({
             style={{
                 display: "flex",
                 alignItems: "center",
-                width: `${containerWidth}px`
+                width: `${containerWidth}px`,
             }}
         >
             <Label
@@ -214,11 +217,11 @@ const Row = ({
 }: RowProp) => {
     return (
         <div
+            {...prop}
             style={{
                 display: "flex",
                 ...prop.style
             }}
-            {...prop}
         >
             {children}
         </div>
